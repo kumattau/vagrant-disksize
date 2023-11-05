@@ -145,10 +145,7 @@ module Vagrant
 
         def generate_resizable_disk(disk)
           src = disk[:file]
-          src_extn = File.extname(src)
-          src_path = File.dirname(src)
-          src_base = File.basename(src, src_extn)
-          dst = File.join(src_path, src_base) + '.vdi'
+          dst = src.delete_suffix(File.extname(src)) + '.vdi'
           disk.merge({ uuid: "(undefined)", file: dst })
         end
 
